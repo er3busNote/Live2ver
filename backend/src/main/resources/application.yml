@@ -1,0 +1,41 @@
+server:
+  host:
+    mariadb: 127.0.0.1
+  port: 9080
+
+spring:
+  application:
+    name: youtube
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mariadb://${server.host.mariadb}:3309/youtube
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: create
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        format_sql: true
+        dialect.storage_engine: innodb
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+      springframework:
+        data:
+          mongodb:
+            repository:
+              query: DEBUG
+        security: DEBUG
+        web:
+          filter: DEBUG
