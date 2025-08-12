@@ -9,28 +9,28 @@ import java.time.Instant
 @Table(
     name = "PLAYLIST",
     indexes = [
-        Index(name = "FK_USER_TO_PLAYLIST", columnList = "USER_ID")
+        Index(name = "FK_USER_TO_PLAYLIST", columnList = "US_ID")
     ]
 )
 data class Playlist(
     @Id
-    @Column(name = "PLAYLIST_ID", length = 32)
+    @Column(name = "PLST_ID", length = 32)
     var id: String? = null,
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NM", nullable = false)
     val name: String,
 
-    @Column(name = "DESCRIPTION", nullable = false)
+    @Column(name = "DSC", nullable = false)
     val description: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", nullable = false, foreignKey = ForeignKey(name = "FK_USER_TO_PLAYLIST"))
+    @JoinColumn(name = "US_ID", nullable = false, foreignKey = ForeignKey(name = "FK_USER_TO_PLAYLIST"))
     val user: User,
 
-    @Column(name = "CREATED_AT", nullable = false)
+    @Column(name = "CRT_AT", nullable = false)
     var createdAt: Instant = Instant.now(),
 
-    @Column(name = "UPDATED_AT", nullable = false)
+    @Column(name = "UPD_AT", nullable = false)
     var updatedAt: Instant = Instant.now(),
 
     @OneToMany(mappedBy = "playlist", cascade = [CascadeType.ALL], orphanRemoval = true)

@@ -8,23 +8,23 @@ import java.time.Instant
 @Entity
 @Table(
     name = "CATEGORY",
-    uniqueConstraints = [UniqueConstraint(name = "UK_NAME", columnNames = ["NAME"])]
+    uniqueConstraints = [UniqueConstraint(name = "UK_NM", columnNames = ["NM"])]
 )
 data class Category(
     @Id
-    @Column(name = "CATEGORY_ID", length = 32)
+    @Column(name = "CAT_ID", length = 32)
     var id: String? = null,
 
-    @Column(name = "NAME", nullable = false, unique = true)
+    @Column(name = "NM", nullable = false, unique = true)
     val name: String,
 
-    @Column(name = "DESCRIPTION", nullable = false)
+    @Column(name = "DSC", nullable = false)
     val description: String? = null,
 
-    @Column(name = "CREATED_AT", nullable = false)
+    @Column(name = "CRT_AT", nullable = false)
     var createdAt: Instant = Instant.now(),
 
-    @Column(name = "UPDATED_AT", nullable = false)
+    @Column(name = "UPD_AT", nullable = false)
     var updatedAt: Instant = Instant.now(),
 
     @OneToMany(mappedBy = "category", cascade = [CascadeType.ALL], orphanRemoval = true)

@@ -9,24 +9,24 @@ import java.time.Instant
 @Table(
     name = "PLAYLIST_VIDEO",
     indexes = [
-        Index(name = "FK_PLAYLIST_TO_PLAYLIST_VIDEO", columnList = "PLAYLIST_ID"),
-        Index(name = "FK_VIDEO_TO_PLAYLIST_VIDEO", columnList = "VIDEO_ID")
+        Index(name = "FK_PLAYLIST_TO_PLAYLIST_VIDEO", columnList = "PLST_ID"),
+        Index(name = "FK_VIDEO_TO_PLAYLIST_VIDEO", columnList = "VDO_ID")
     ]
 )
 data class PlaylistVideo(
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PLAYLIST_ID", insertable = false, updatable = false, foreignKey = ForeignKey(name = "FK_PLAYLIST_TO_PLAYLIST_VIDEO"))
+    @JoinColumn(name = "PLST_ID", insertable = false, updatable = false, foreignKey = ForeignKey(name = "FK_PLAYLIST_TO_PLAYLIST_VIDEO"))
     val playlist: Playlist? = null,
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "VIDEO_ID", insertable = false, updatable = false, foreignKey = ForeignKey(name = "FK_VIDEO_TO_PLAYLIST_VIDEO"))
+    @JoinColumn(name = "VDO_ID", insertable = false, updatable = false, foreignKey = ForeignKey(name = "FK_VIDEO_TO_PLAYLIST_VIDEO"))
     val video: Video? = null,
 
-    @Column(name = "CREATED_AT", nullable = false)
+    @Column(name = "CRT_AT", nullable = false)
     val createdAt: Instant = Instant.now(),
 
-    @Column(name = "UPDATED_AT", nullable = false)
+    @Column(name = "UPD_AT", nullable = false)
     val updatedAt: Instant = Instant.now()
 ) : Serializable

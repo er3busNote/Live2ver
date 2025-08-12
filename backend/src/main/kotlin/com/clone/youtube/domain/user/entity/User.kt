@@ -11,7 +11,6 @@ import com.clone.youtube.global.common.uuid.UuidManager
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.PrePersist
@@ -27,13 +26,13 @@ import java.time.Instant
 )
 data class User (
     @Id
-    @Column(name = "USER_ID", length = 32)
+    @Column(name = "US_ID", length = 32)
     var id: String? = null,
 
     @Column(name = "CLK_ID", nullable = false, unique = true)
     val clerkId: String,
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NM", nullable = false)
     val name: String,
 
     @Column(name = "BNNR_URL")
@@ -45,10 +44,10 @@ data class User (
     @Column(name = "IMG_URL", nullable = false)
     val imageUrl: String,
 
-    @Column(name = "CREATED_AT", nullable = false)
+    @Column(name = "CRT_AT", nullable = false)
     var createdAt: Instant = Instant.now(),
 
-    @Column(name = "UPDATED_AT", nullable = false)
+    @Column(name = "UPD_AT", nullable = false)
     var updatedAt: Instant = Instant.now(),
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)

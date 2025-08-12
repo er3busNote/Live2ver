@@ -10,28 +10,28 @@ import java.time.Instant
 @Table(
     name = "VIDEO_REACTION",
     indexes = [
-        Index(name = "FK_USER_TO_VIDEO_REACTION", columnList = "USER_ID"),
-        Index(name = "FK_VIDEO_TO_VIDEO_REACTION", columnList = "VIDEO_ID")
+        Index(name = "FK_USER_TO_VIDEO_REACTION", columnList = "US_ID"),
+        Index(name = "FK_VIDEO_TO_VIDEO_REACTION", columnList = "VDO_ID")
     ]
 )
 data class VideoReaction(
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", insertable = false, updatable = false, foreignKey = ForeignKey(name = "FK_USER_TO_VIDEO_REACTION"))
+    @JoinColumn(name = "US_ID", insertable = false, updatable = false, foreignKey = ForeignKey(name = "FK_USER_TO_VIDEO_REACTION"))
     val user: User? = null,
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "VIDEO_ID", insertable = false, updatable = false, foreignKey = ForeignKey(name = "FK_VIDEO_TO_VIDEO_REACTION"))
+    @JoinColumn(name = "VDO_ID", insertable = false, updatable = false, foreignKey = ForeignKey(name = "FK_VIDEO_TO_VIDEO_REACTION"))
     val video: Video? = null,
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "TYPE", nullable = false)
     val type: ReactionType,
 
-    @Column(name = "CREATED_AT", nullable = false)
+    @Column(name = "CRT_AT", nullable = false)
     val createdAt: Instant = Instant.now(),
 
-    @Column(name = "UPDATED_AT", nullable = false)
+    @Column(name = "UPD_AT", nullable = false)
     val updatedAt: Instant = Instant.now()
 ) : Serializable

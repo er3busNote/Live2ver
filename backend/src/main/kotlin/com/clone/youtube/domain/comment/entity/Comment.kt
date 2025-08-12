@@ -10,37 +10,37 @@ import java.time.Instant
 @Table(
     name = "COMMENT",
     indexes = [
-        Index(name = "FK_USER_TO_COMMENT", columnList = "USER_ID"),
-        Index(name = "FK_VIDEO_TO_COMMENT", columnList = "VIDEO_ID")
+        Index(name = "FK_USER_TO_COMMENT", columnList = "US_ID"),
+        Index(name = "FK_VIDEO_TO_COMMENT", columnList = "VDO_ID")
     ]
 )
 data class Comment(
     @Id
-    @Column(name = "COMMENT_ID", length = 32)
+    @Column(name = "CMT_ID", length = 32)
     var id: String? = null,
 
-    @Column(name = "PARENT_ID", length = 32)
+    @Column(name = "PRT_ID", length = 32)
     val parentId: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", nullable = false, foreignKey = ForeignKey(name = "FK_USER_TO_COMMENT"))
+    @JoinColumn(name = "US_ID", nullable = false, foreignKey = ForeignKey(name = "FK_USER_TO_COMMENT"))
     val user: User,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "VIDEO_ID", nullable = false, foreignKey = ForeignKey(name = "FK_VIDEO_TO_COMMENT"))
+    @JoinColumn(name = "VDO_ID", nullable = false, foreignKey = ForeignKey(name = "FK_VIDEO_TO_COMMENT"))
     val video: Video,
 
-    @Column(name = "VALUE", nullable = false)
+    @Column(name = "VAL", nullable = false)
     val value: String,
 
-    @Column(name = "CREATED_AT", nullable = false)
+    @Column(name = "CRT_AT", nullable = false)
     var createdAt: Instant = Instant.now(),
 
-    @Column(name = "UPDATED_AT", nullable = false)
+    @Column(name = "UPD_AT", nullable = false)
     var updatedAt: Instant = Instant.now(),
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PARENT_ID", insertable = false, updatable = false, foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "PRT_ID", insertable = false, updatable = false, foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     val parent: Comment? = null,
 
     @OneToMany(mappedBy = "parent", cascade = [CascadeType.ALL], orphanRemoval = true)
