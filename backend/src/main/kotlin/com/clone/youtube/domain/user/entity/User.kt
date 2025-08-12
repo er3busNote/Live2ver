@@ -32,6 +32,9 @@ data class User (
     @Column(name = "CLK_ID", nullable = false, unique = true)
     val clerkId: String,
 
+    @Column(name = "PWD", nullable = false)
+    val password: String,
+
     @Column(name = "NM", nullable = false)
     val name: String,
 
