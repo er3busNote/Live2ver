@@ -44,8 +44,8 @@ data class User (
     @Column(name = "BNNR_KEY")
     val bannerKey: String? = null,
 
-    @Column(name = "IMG_URL", nullable = false)
-    val imageUrl: String,
+    @Column(name = "IMG_URL")
+    val imageUrl: String? = null,
 
     @Column(name = "CRT_AT", nullable = false)
     var createdAt: Instant = Instant.now(),
