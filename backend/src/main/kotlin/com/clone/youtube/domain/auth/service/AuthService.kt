@@ -18,16 +18,16 @@ class AuthService (
     private val refreshTokenStore = mutableMapOf<String, String>()
 
     fun login(loginRequest: LoginRequest): TokenResponse {
-        val user = userRepository.findByClerkId(loginRequest.userId)
+        val user = userRepository.findByUsername(loginRequest.username)
             ?: throw UsernameNotFoundException("사용자를 찾을 수 없습니다.")
 
         if (!passwordEncoder.matches(loginRequest.password, user.password)) {
             throw BadCredentialsException("비밀번호가 일치하지 않습니다.")
         }
 
-        val accessToken = JwtManager.generateAccessToken(user.clerkId)
-        val refreshToken = JwtManager.generateRefreshToken(user.clerkId)
-        refreshTokenStore[user.clerkId] = refreshToken
+        val accessToken = JwtManager.generateAccessToken(user.username)
+        val refreshToken = JwtManager.generateRefreshToken(user.username)
+        refreshTokenStore[user.username] = refreshToken
 
         return TokenResponse.of(
             accessToken,
@@ -36,14 +36,14 @@ class AuthService (
     }
 
     fun refreshToken(refreshRequest: RefreshRequest): TokenResponse {
-        val userId = refreshRequest.userId
         val refreshToken = refreshRequest.refreshToken
-        val storedToken = refreshTokenStore[userId]
+        val username = JwtManager.getUsernameFromToken(refreshToken)
+        val storedToken = refreshTokenStore[username]
         if (storedToken == null || storedToken != refreshToken) {
             throw IllegalArgumentException("Invalid refresh token")
         }
         return TokenResponse.of(
-            JwtManager.generateAccessToken(userId),
+            JwtManager.generateAccessToken(username),
             refreshToken
         )
     }

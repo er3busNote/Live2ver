@@ -22,15 +22,15 @@ import java.time.Instant
 @Entity
 @Table(
     name = "USER",
-    uniqueConstraints = [UniqueConstraint(name = "UK_CLK_ID", columnNames = ["CLK_ID"])]
+    uniqueConstraints = [UniqueConstraint(name = "UK_ID", columnNames = ["ID"])]
 )
 data class User (
     @Id
     @Column(name = "US_ID", length = 32)
     var id: String? = null,
 
-    @Column(name = "CLK_ID", nullable = false, unique = true)
-    val clerkId: String,
+    @Column(name = "ID", nullable = false, unique = true)
+    val username: String,
 
     @Column(name = "PWD", nullable = false)
     val password: String,
