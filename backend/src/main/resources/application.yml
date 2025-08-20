@@ -43,3 +43,7 @@ logging:
         security: DEBUG
         web:
           filter: DEBUG
+
+security:
+  jwt:
+    secret: youtube-clone-jwttoken-startapp!@  # 최소 32개의 문자열 (256bit)

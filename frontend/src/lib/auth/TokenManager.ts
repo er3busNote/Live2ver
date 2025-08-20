@@ -51,7 +51,7 @@ export class TokenManager {
     }
 
     // refresh 호출
-    const { data } = await AuthService.refreshToken(this.token.refreshToken);
+    const data = await AuthService.refreshToken(this.token.refreshToken);
     this.setTokens(data);
     return data.accessToken;
   }
