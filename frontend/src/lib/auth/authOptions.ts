@@ -1,12 +1,12 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JWT } from "next-auth/jwt";
-import { Session, AuthOptions } from "next-auth";
+import { Session, NextAuthOptions } from "next-auth";
 import { TokenManager } from "@/lib/auth/TokenManager";
 import { AuthService } from "@/services/AuthService";
 
 const tokenManager = new TokenManager();
 
-export const authOptions: AuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -19,6 +19,7 @@ export const authOptions: AuthOptions = {
   ],
   session: { strategy: "jwt", maxAge: 60 * 60 * 4 }, // session 자체의 만료시간 (4시간)
   jwt: { maxAge: 60 * 60 * 4 }, // JWT 자체의 만료시간 (4시간)
+  secret: process.env.NEXT_AUTH_SECRET, // Global Secret 키
   cookies: {
     sessionToken: {
       name:
@@ -43,14 +44,18 @@ export const authOptions: AuthOptions = {
           accessToken: user.accessToken!,
           refreshToken: user.refreshToken!,
         });
-      }
 
-      const accessToken = await tokenManager.getValidAccessToken();
-      token.accessToken = accessToken;
-      token.refreshToken = tokenManager.getRefreshToken();
+        const accessToken = await tokenManager.getValidAccessToken();
+        token.accessToken = accessToken;
+        token.refreshToken = tokenManager.getRefreshToken();
+      }
       return token;
     },
     session: async ({ session, token }: { session: Session; token: JWT }) => {
+      session.user = {
+        id: token.name as string,
+        name: token.name as string,
+      };
       session.accessToken = token.accessToken as string;
       session.refreshToken = token.refreshToken as string;
       return session;
