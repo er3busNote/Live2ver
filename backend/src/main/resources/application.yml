@@ -9,7 +9,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mariadb://${server.host.mariadb}:3309/youtube
+    url: jdbc:mariadb://${server.host.mariadb}:3309/live2ver
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     properties:
@@ -46,4 +46,4 @@ logging:
 
 security:
   jwt:
-    secret: youtube-clone-jwttoken-startapp!@  # 최소 32개의 문자열 (256bit)
+    secret: live2ver-web-jwttoken-startapp!@  # 최소 32개의 문자열 (256bit)
