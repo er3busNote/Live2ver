@@ -9,8 +9,8 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mariadb://${server.host.mariadb}:3309/live2ver
-    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://${server.host.mariadb}:3309/live2ver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     properties:
       hibernate:
@@ -25,6 +25,7 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        #implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
 
 logging:
   level:
