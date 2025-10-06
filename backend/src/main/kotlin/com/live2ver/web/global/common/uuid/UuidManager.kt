@@ -7,4 +7,7 @@ import java.util.UUID
 object UuidManager {
     fun generateId(): String =
         UUID.randomUUID().toString().replace("-", "").uppercase()
+
+    fun generateUuid(): String =
+        UUID.randomUUID().toString()
 }

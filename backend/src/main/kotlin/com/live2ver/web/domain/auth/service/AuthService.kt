@@ -37,7 +37,8 @@ class AuthService (
 
     fun refreshToken(refreshRequest: RefreshRequest): TokenResponse {
         val refreshToken = refreshRequest.refreshToken
-        val username = JwtManager.getUsernameFromToken(refreshToken)
+        val claims = JwtManager.validateAndGetClaims(refreshToken)
+        val username = claims.subject
         val storedToken = refreshTokenStore[username]
         if (storedToken == null || storedToken != refreshToken) {
             throw IllegalArgumentException("Invalid refresh token")

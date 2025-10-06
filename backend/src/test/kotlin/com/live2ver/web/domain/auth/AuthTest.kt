@@ -6,6 +6,7 @@ import com.live2ver.web.domain.user.entity.User
 import com.live2ver.web.domain.user.repository.UserRepository
 import com.live2ver.web.global.common.response.ResponseHandler
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.live2ver.web.global.common.jwt.JwtManager
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -21,6 +22,7 @@ import kotlin.test.assertNotEquals
 
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import java.util.Date
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -90,5 +92,17 @@ class AuthTest @Autowired constructor(
         assertNotNull(newTokenResponse.accessToken)
         assertEquals(tokenResponse.refreshToken, newTokenResponse.refreshToken)
         assertNotEquals(tokenResponse.accessToken, newTokenResponse.accessToken)
+
+        if(JwtManager.validate(tokenResponse.accessToken)){
+            val claims = JwtManager.validateAndGetClaims(tokenResponse.accessToken)
+            val expiration: Date = claims.expiration
+            println("토큰 만료 시간: $expiration")
+        }
+
+        //println("로그인 됨 : $loginResponse")
+        //println("토큰 재발급 됨 : $refreshResponse")
+
+        println("기존 토큰 : $tokenResponse")
+        println("신규 발급된 토큰 : $newTokenResponse")
     }
 }
