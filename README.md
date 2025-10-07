@@ -8,7 +8,7 @@
 라이브 스트리밍 모바일 웹 화면 구현
 
 ## Init Setting
-- [Spring Data JPA with Kotlin](https://start.spring.io/#!type=gradle-project-kotlin&language=kotlin&platformVersion=3.5.4&packaging=jar&jvmVersion=17&groupId=com.live2ver&artifactId=live2ver&name=live2ver&description=Live2ver%20Mobile%20Web%20with%20Kotlin&packageName=com.live2ver.web&dependencies=data-jpa,lombok,devtools,mariadb,security,validation)
+- [Spring Data JPA with Kotlin](https://start.spring.io/#!type=gradle-project-kotlin&language=kotlin&platformVersion=3.5.4&packaging=jar&jvmVersion=17&groupId=com.live2ver&artifactId=live2ver&name=live2ver&description=Live2ver%20Mobile%20Web%20with%20Kotlin&packageName=com.live2ver.web&dependencies=data-jpa,devtools,mariadb,security,validation)
 
 ## Compatible
 - JAVA: OpenJDK 17

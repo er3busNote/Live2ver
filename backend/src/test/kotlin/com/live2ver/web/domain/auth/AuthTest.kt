@@ -7,6 +7,7 @@ import com.live2ver.web.domain.user.repository.UserRepository
 import com.live2ver.web.global.common.response.ResponseHandler
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.live2ver.web.global.common.jwt.JwtManager
+import com.live2ver.web.global.common.utils.DateUtil
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -95,7 +96,7 @@ class AuthTest @Autowired constructor(
 
         if(JwtManager.validate(tokenResponse.accessToken)){
             val claims = JwtManager.validateAndGetClaims(tokenResponse.accessToken)
-            val expiration: Date = claims.expiration
+            val expiration: String = DateUtil.toLocalString(claims.expiration)
             println("토큰 만료 시간: $expiration")
         }
 
