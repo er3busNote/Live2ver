@@ -23,7 +23,6 @@ import kotlin.test.assertNotEquals
 
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import java.util.Date
 
 @SpringBootTest
 @AutoConfigureMockMvc
